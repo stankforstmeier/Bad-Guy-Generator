@@ -1,1 +1,23 @@
-#
+#BGG2
+
+import random
+
+a=0
+b=0
+w=0
+s=0
+
+def G(level):
+  L_asp_names = ['a','b','w','s']
+  L_asp = [a,b,w,s]
+  print (L_asp)
+  #randomly selecting an aspect
+  selector1 = random.randint(0,3)
+  #reassigned that aspect as a number in its place in the list
+  selector1_level = random.randint(1,5)
+  print (L_asp_names[selector1] = " value is " + selector1_level)
+
+  L_asp.del[selector1]
+  #randomly selects a new partner for the first aspect
+  selector2 = random.randint(0,2)
+  L_asp[selector2] = 2*level - selector_level
