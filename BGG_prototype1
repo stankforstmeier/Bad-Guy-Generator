@@ -1,0 +1,37 @@
+#this is the badguy generator
+#shorthand
+#weapons = w, armor = a, b = abilities, s = species
+
+import random
+
+print ("This is a badguy generator. The function is named generate. Please input a number 1, 2, 3, 4, or 5. The higher the number, the more difficult the badguy.")
+
+def generatelvl1():
+  pass
+
+def generatelvl2():
+  pass
+
+def generatelvl3():
+  pass
+
+def generatelvl4():
+  pass
+
+def generatelvl5():
+  pass
+
+def generate(level):
+  x = level
+  if x == 1:
+    generatelvl1()
+  elif x == 2:
+    generatelvl2()
+  elif x == 3:
+    generatelvl3()
+  elif x == 4:
+    generatelvl4()
+  elif x == 5:
+    generatelvl5()
+  else:
+    print ("Please input a number 1, 2, 3, 4, or 5. The higher the number, the more difficult the badguy.")
