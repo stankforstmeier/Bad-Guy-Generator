@@ -13,6 +13,8 @@ L_weapons_3 = ['blaster pistol', 'halberd', 'DC-15', 'battle axe', 'broad sword'
 L_weapons_4 = ['scatter gun', 'long rifle', 'machine gun', 'grenade launcher', 'electro-sword']
 L_weapons_5 = ['missile launcher', 'sniper rifle', 'explosive hammer', 'laser-sword']
 
+L_L_weapons = [L_weapons_1, L_weapons_2, L_weapons_3, L_weapons_4, L_weapons_5]
+
 def G(level):
 
   L_asp_names = ['a','b','w','s']
@@ -30,7 +32,7 @@ def G(level):
   selector2 = random.randint(0,2)
   L_asp[selector2] = 2*level - selector1_level
 
-  if L_asp[selector2] <= 0:
+  if L_asp[selector2] <= 0 or L_asp[selector2] > 5:
       G(level)
 
   else:
@@ -53,7 +55,7 @@ def G(level):
       selector4 = 0
       L_asp[selector4] = 2*level - selector3_level
 
-      if L_asp[selector4] <= 0:
+      if L_asp[selector4] <= 0  or L_asp[selector4] > 5:
         G(level)
       else:
         fourth_value = (str(L_asp_names[selector4])+ " value is " +str(L_asp[selector4]))
