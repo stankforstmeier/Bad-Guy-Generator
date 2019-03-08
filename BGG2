@@ -7,6 +7,12 @@ b=0
 w=0
 s=0
 
+L_weapons_1 = ['dagger', 'slingshot', 'wooden shield', 'spear', 'small axe', 'club', 'dirk', 'whip', 'duel daggers']
+L_weapons_2 = ['small sword', 'metal shield', 'axe', 'hatchets', 'throwing stars', 'small hammer', 'metal spear', 'mace']
+L_weapons_3 = ['blaster pistol', 'halberd', 'DC-15', 'battle axe', 'broad sword', 'SWAT Shield']
+L_weapons_4 = ['scatter gun', 'long rifle', 'machine gun', 'grenade launcher', 'electro-sword']
+L_weapons_5 = ['missile launcher', 'sniper rifle', 'explosive hammer', 'laser-sword']
+
 def G(level):
 
   L_asp_names = ['a','b','w','s']
