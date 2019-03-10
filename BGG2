@@ -9,22 +9,113 @@ s=0
 
 L_weapons_1 = ['dagger', 'slingshot', 'wooden shield', 'spear', 'small axe', 'club', 'dirk', 'whip', 'duel daggers']
 L_weapons_2 = ['small sword', 'metal shield', 'axe', 'hatchets', 'throwing stars', 'small hammer', 'metal spear', 'mace']
-L_weapons_3 = ['blaster pistol', 'halberd', 'DC-15', 'battle axe', 'broad sword', 'SWAT Shield']
+L_weapons_3 = ['blaster pistol', 'halberd', 'DC-15', 'battle axe', 'broad sword']
 L_weapons_4 = ['scatter gun', 'long rifle', 'machine gun', 'grenade launcher', 'electro-sword']
 L_weapons_5 = ['missile launcher', 'sniper rifle', 'explosive hammer', 'laser-sword']
 
-L_L_weapons = [L_weapons_1, L_weapons_2, L_weapons_3, L_weapons_4, L_weapons_5]
+L_b_1=['small poison spit','medium jumps','fast punches', 'agility']
+L_b_2=['fast running','hard to see','sonic scream', 'produces smoke']
+L_b_3=['high endurance','medium strength','laser eyes', 'scream blast', 'limited pain']
+L_b_4=['huge jumps','sonic blast','flight', 'moderated predictive abilities']
+L_b_5=['temporary mind control','metal bending','the force']
+
+L_s_1=['racoon','imp','spider','hobbit','small goblin', 'B1 Battle Droid']
+L_s_2=['orc','small human','large porcupine', 'water goblin', 'STOC Droid']
+L_s_3=['Bear','ogre','super battle droid', 'Boxer Droid']
+L_s_4=['feorrin','Platypus bear','mooselion','falleen', 'Clone Commando', 'rhino', 'assassin probe']
+L_s_5=['groot', "shia'du", "Changling (odo)", 'troll', 'demi-rancor', 'MDD']
+
+L_a_1 = ['vambraces','large wooden shield','chainmail cape']
+L_a_2 = ['full metal armor','medium steal shield','full studded leather armor', 'clone armor']
+L_a_3 = ['jetpack','high speed boots','magic thick skin', 'plastoid armor', 'red guard armor']
+L_a_4 = ['durasteel full body', 'rune armor', 'morph metal armor', 'spartan armor']
+L_a_5 = ['bohulrak armor', 'cortosis gauntlets', 'iron man suit', 'molding metal armor']
+
+a_lists=["The Badguy's armor is ", L_a_1, L_a_2, L_a_3, L_a_4, L_a_5]
+b_lists = ["The Badguy's ability is ",L_b_1, L_b_2, L_b_3, L_b_4, L_b_5]
+s_lists = ["The Badguy's species is ", L_s_1, L_s_2, L_s_3, L_s_4, L_s_5]
+w_lists = ["The Badguy's weapon is ", L_weapons_1, L_weapons_2, L_weapons_3, L_weapons_4, L_weapons_5]
+
+
+suzereign = [a_lists, b_lists, s_lists, w_lists]
+
+def orderer(asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl):
+
+    input_list = [asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl]
+    ordered_list = [0,0,0,0,0,0,0,0]
+    i = 0
+    #for i in input_list:
+    while i < len(input_list) - 1:
+
+        if input_list[i] == 'a':
+            ordered_list[0] = 0
+            ordered_list[1] = input_list[i + 1]
+            i +=1
+        elif input_list[i] == 'b':
+            ordered_list[2] = 1
+            ordered_list[3] = input_list[i+1]
+            i +=1
+        elif input_list[i] == 's':
+            ordered_list[4] = 2
+            ordered_list[5] = input_list[i+1]
+            i +=1
+        elif input_list[i] == 'w':
+            ordered_list[6] = 3
+            ordered_list[7] = input_list[i+1]
+            i +=1
+        else:
+            i +=1
+
+    # species first
+    finder (ordered_list[4], ordered_list[5])
+    #weapons next
+    finder (ordered_list[6], ordered_list[7])
+    #armor
+    finder (ordered_list[0], ordered_list[1])
+    #abilites
+    finder (ordered_list[2], ordered_list[3])
+
+
+
+def finder(asp, asp_lvl):
+    #found_list = False
+    #while found_list == False:
+    #    if asp == 'a':
+    #        asp = 0
+    #        found_list = True
+    #    elif asp == 'b':
+    #        asp = 1
+    #        found_list = True
+    #    elif asp == 's':
+    #        asp = 2
+    #        found_list = True
+    #    elif asp == 'w':
+    #        asp = 3
+    #        found_list = True
+    #print (suzereign[asp])
+
+    #finds the correct aspect master list
+    sel_asp = suzereign[asp]
+    #finds the correct level of the selected aspect
+    sel_asp_lvl = sel_asp[asp_lvl]
+
+    item_sel = random.randint(0, len(sel_asp_lvl)-1)
+
+    #sel_asp_lvl[item_sel]
+
+    print (sel_asp[0] + sel_asp_lvl[item_sel])
+    #print (sel_asp_lvl[item_sel])
 
 def G(level):
 
-  L_asp_names = ['a','b','w','s']
-  L_asp = [a,b,w,s]
+  L_asp_names = ['a','b','s','w']
+  L_asp = [a,b,s,w]
   #randomly selecting an aspect
   selector1 = random.randint(0,3)
   #reassigned that aspect as a number in its place in the list
   selector1_level = random.randint(1,5)
-  first_value = (str(L_asp_names[selector1]) + ' value is ' + str(selector1_level))
-
+  asp1 = L_asp_names[selector1]
+  asp1_lvl = selector1_level
 
   del L_asp_names[selector1]
   del L_asp[selector1]
@@ -37,7 +128,8 @@ def G(level):
 
   else:
 
-      second_value = (str(L_asp_names[selector2]) + ' value is ' + str(L_asp[selector2]))
+      asp2 = L_asp_names[selector2]
+      asp2_lvl = L_asp[selector2]
 
       del L_asp_names[selector2]
       del L_asp[selector2]
@@ -45,7 +137,9 @@ def G(level):
       #getting the first variable of the second pair
       selector3 = random.randint(0,1)
       selector3_level = random.randint(1,5)
-      third_value = (str(L_asp_names[selector3])+ " value is " + str(selector3_level))
+
+      asp3 = L_asp_names[selector3]
+      asp3_lvl = selector3_level
 
       del L_asp_names[selector3]
       del L_asp[selector3]
@@ -58,8 +152,11 @@ def G(level):
       if L_asp[selector4] <= 0  or L_asp[selector4] > 5:
         G(level)
       else:
-        fourth_value = (str(L_asp_names[selector4])+ " value is " +str(L_asp[selector4]))
-        print (first_value)
-        print (second_value)
-        print (third_value)
-        print (fourth_value)
+        asp4 = L_asp_names[selector4]
+        asp4_lvl = L_asp[selector4]
+
+        orderer(asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl)
+        #finder(asp1, asp1_lvl)
+        #finder(asp2, asp2_lvl)
+        #finder(asp3, asp3_lvl)
+        #finder(asp4, asp4_lvl)
