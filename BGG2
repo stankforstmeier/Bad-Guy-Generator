@@ -7,11 +7,11 @@ b=0
 w=0
 s=0
 
-L_weapons_1 = ['dagger', 'slingshot', 'wooden shield', 'spear', 'small axe', 'club', 'dirk', 'whip', 'duel daggers']
-L_weapons_2 = ['small sword', 'metal shield', 'axe', 'hatchets', 'throwing stars', 'small hammer', 'metal spear', 'mace']
-L_weapons_3 = ['blaster pistol', 'halberd', 'DC-15', 'battle axe', 'broad sword']
-L_weapons_4 = ['scatter gun', 'long rifle', 'machine gun', 'grenade launcher', 'electro-sword']
-L_weapons_5 = ['missile launcher', 'sniper rifle', 'explosive hammer', 'laser-sword']
+L_w_1=['two knucklebusters','metal staff','wooden spear','small hammer','pair of daggers','flail','baseball bat','nunchuks','machete','bow and arrows','short sword','axe','sickle','metal club','rusty sword','crossbow','small fire spell','light confusion spell','dagger','hatchet','throwing stars']
+L_w_2=['mace','morning star','large hammer','blaster','throwing spears','halberd','four smoke grenades','bladed fingers','whip','molotov cocktail','dart gun','saber','trident','pair of short swords','gaffii stick']
+L_w_3=['shotgun','long rifle','machine gun','broad sword','laser sword','net gun','huge axes','pair of axes','harpoon gun','war-style chairsaw','horsemans pick','sharp pickaxe','endless throwing knives','clawed gloves','commando droid sword','wrist rockets']
+L_w_4=['scatter gun','sniper gun','laser sword','gattling gun','electrostaff','electrified net gun','flame sword','reinforced steal warhammer','grenade launcher','mortar launcher','bowcaster','laser whip','flamethrower','ice gun','phaser','cotorsis vibro sword','endless grenades','darksaber','geonosian sonic blaster','Ryyk blades']
+L_w_5=['missile launcher','explosive hammer','magically powerful sword','lightsaber','ultra crystal blaster','demon cursed sword','angel style warhammer','demon bone spear','rune launching machine gun','magic bow','spirit inhabited axe','sonic arm cannon','lava spray gun','ray gun','amphistaff','disintegration blaster','force pike']
 
 L_b_1=['small poison spit','medium jumps','fast punches', 'agility']
 L_b_2=['fast running','hard to see','sonic scream', 'produces smoke']
