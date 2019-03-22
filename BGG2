@@ -7,11 +7,11 @@ b=0
 w=0
 s=0
 
-L_w_1=['two knucklebusters','metal staff','wooden spear','small hammer','pair of daggers','flail','baseball bat','nunchuks','machete','bow and arrows','short sword','axe','sickle','metal club','rusty sword','crossbow','small fire spell','light confusion spell','dagger','hatchet','throwing stars']
-L_w_2=['mace','morning star','large hammer','blaster','throwing spears','halberd','four smoke grenades','bladed fingers','whip','molotov cocktail','dart gun','saber','trident','pair of short swords','gaffii stick']
-L_w_3=['shotgun','long rifle','machine gun','broad sword','laser sword','net gun','huge axes','pair of axes','harpoon gun','war-style chairsaw','horsemans pick','sharp pickaxe','endless throwing knives','clawed gloves','commando droid sword','wrist rockets']
-L_w_4=['scatter gun','sniper gun','laser sword','gattling gun','electrostaff','electrified net gun','flame sword','reinforced steal warhammer','grenade launcher','mortar launcher','bowcaster','laser whip','flamethrower','ice gun','phaser','cotorsis vibro sword','endless grenades','darksaber','geonosian sonic blaster','Ryyk blades']
-L_w_5=['missile launcher','explosive hammer','magically powerful sword','lightsaber','ultra crystal blaster','demon cursed sword','angel style warhammer','demon bone spear','rune launching machine gun','magic bow','spirit inhabited axe','sonic arm cannon','lava spray gun','ray gun','amphistaff','disintegration blaster','force pike']
+L_weapons_1 = ['dagger', 'slingshot', 'wooden shield', 'spear', 'small axe', 'club', 'dirk', 'whip', 'duel daggers']
+L_weapons_2 = ['small sword', 'metal shield', 'axe', 'hatchets', 'throwing stars', 'small hammer', 'metal spear', 'mace']
+L_weapons_3 = ['blaster pistol', 'halberd', 'DC-15', 'battle axe', 'broad sword']
+L_weapons_4 = ['scatter gun', 'long rifle', 'machine gun', 'grenade launcher', 'electro-sword']
+L_weapons_5 = ['missile launcher', 'sniper rifle', 'explosive hammer', 'laser-sword']
 
 L_b_1=['small poison spit','medium jumps','fast punches', 'agility']
 L_b_2=['fast running','hard to see','sonic scream', 'produces smoke']
@@ -31,16 +31,27 @@ L_a_3 = ['jetpack','high speed boots','magic thick skin', 'plastoid armor', 'red
 L_a_4 = ['durasteel full body', 'rune armor', 'morph metal armor', 'spartan armor']
 L_a_5 = ['bohulrak armor', 'cortosis gauntlets', 'iron man suit', 'molding metal armor']
 
-a_lists=["The Badguy's armor is ", L_a_1, L_a_2, L_a_3, L_a_4, L_a_5]
-b_lists = ["The Badguy's ability is ",L_b_1, L_b_2, L_b_3, L_b_4, L_b_5]
-s_lists = ["The Badguy's species is ", L_s_1, L_s_2, L_s_3, L_s_4, L_s_5]
-w_lists = ["The Badguy's weapon is ", L_weapons_1, L_weapons_2, L_weapons_3, L_weapons_4, L_weapons_5]
+a_lists=["The Badguy's armor is: ", L_a_1, L_a_2, L_a_3, L_a_4, L_a_5]
+b_lists = ["The Badguy's ability is: ",L_b_1, L_b_2, L_b_3, L_b_4, L_b_5]
+s_lists = ["The Badguy's species is: ", L_s_1, L_s_2, L_s_3, L_s_4, L_s_5]
+w_lists = ["", L_weapons_1, L_weapons_2, L_weapons_3, L_weapons_4, L_weapons_5]
 
 
 suzereign = [a_lists, b_lists, s_lists, w_lists]
 
-def orderer(asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl):
+def repeater_deleter(weapons, ordered_list):
+    #this fucker is going to go through the list of weapons and check for any repeats and replace them with good boys
+    i = 0
+    while i < len(weapons) and i + 1 < len(weapons):
+        if weapons[i] == weapons[i+1]:
+            weapons[i] = finder(ordered_list[6], ordered_list[7])
+        else:
+            i += 1
+    return weapons
 
+def orderer(asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl, level):
+
+    #level is the overall level of the BG desired by the user
     input_list = [asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl]
     ordered_list = [0,0,0,0,0,0,0,0]
     i = 0
@@ -67,32 +78,60 @@ def orderer(asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl):
             i +=1
 
     # species first
-    finder (ordered_list[4], ordered_list[5])
+    print (finder (ordered_list[4], ordered_list[5]))
+
     #weapons next
-    finder (ordered_list[6], ordered_list[7])
+    num_weapons = random.randint(1, ordered_list[7])
+
+    weapons = []
+
+    if num_weapons == 1:
+        print (finder(ordered_list[6], ordered_list[7]))
+
+    elif num_weapons == 2:
+        first_weapon = random.randint(1, ordered_list[7] - num_weapons + 1)
+        weapons.append(finder(ordered_list[6], first_weapon))
+        second_weapon = ordered_list[7] - first_weapon
+        weapons.append(finder(ordered_list[6], second_weapon))
+
+    elif num_weapons == 3:
+        first_weapon = random.randint(1, ordered_list[7] - num_weapons + 1)
+        weapons.append(finder(ordered_list[6], first_weapon))
+        second_weapon = ordered_list[7] - first_weapon - 1
+        weapons.append(finder(ordered_list[6], second_weapon))
+        third_weapon = ordered_list[7] - first_weapon - second_weapon
+        weapons.append(finder(ordered_list[6], second_weapon))
+
+    elif num_weapons == 4:
+        #first weapon could be a 1 if level == 4
+        weapons.append(finder(ordered_list[6], ordered_list[7]-3))
+        weapons.append(finder(ordered_list[6], 1))
+        weapons.append(finder(ordered_list[6], 1))
+        weapons.append(finder(ordered_list[6], 1))
+
+    elif num_weapons == 5:
+        for x in range(5):
+            weapons.append(finder(ordered_list[6], 1))
+
+    weapons = repeater_deleter(weapons, ordered_list)
+
+    if len(weapons) > 1:
+        print ( "The Badguy's weapons are: ")
+    else:
+        print ("The Badguy's weapon is ")
+    for x in weapons:
+        print (x)
+
     #armor
-    finder (ordered_list[0], ordered_list[1])
+    print (finder (ordered_list[0], ordered_list[1]))
+
     #abilites
-    finder (ordered_list[2], ordered_list[3])
+    if ordered_list[2] != 0:
+        print (finder (ordered_list[2], ordered_list[3]))
 
 
 
 def finder(asp, asp_lvl):
-    #found_list = False
-    #while found_list == False:
-    #    if asp == 'a':
-    #        asp = 0
-    #        found_list = True
-    #    elif asp == 'b':
-    #        asp = 1
-    #        found_list = True
-    #    elif asp == 's':
-    #        asp = 2
-    #        found_list = True
-    #    elif asp == 'w':
-    #        asp = 3
-    #        found_list = True
-    #print (suzereign[asp])
 
     #finds the correct aspect master list
     sel_asp = suzereign[asp]
@@ -103,15 +142,39 @@ def finder(asp, asp_lvl):
 
     #sel_asp_lvl[item_sel]
 
-    print (sel_asp[0] + sel_asp_lvl[item_sel])
+    return (sel_asp[0] + sel_asp_lvl[item_sel])
     #print (sel_asp_lvl[item_sel])
 
-def G(level):
+#
+#
+#
+#
 
+def ability_determiner(pass_through, output_list):
+    output_list = [pass_through, output_list[1]]
+
+    if pass_through == 0:
+        possesses_ability = random.randint(0,1)
+        pass_through = 1
+        output_list = [pass_through, possesses_ability]
+    return output_list
+
+def G(level, pass_through=0, output_list = [0,0]):
   L_asp_names = ['a','b','s','w']
   L_asp = [a,b,s,w]
+
+  output_list = ability_determiner(pass_through, output_list)
+  pass_through = output_list[0]
+
+  if output_list[1] == 1:
+      pass
+
+  else:
+      L_asp_names.remove('b')
+      L_asp.remove(b)
+
   #randomly selecting an aspect
-  selector1 = random.randint(0,3)
+  selector1 = random.randint(0,len(L_asp)-1)
   #reassigned that aspect as a number in its place in the list
   selector1_level = random.randint(1,5)
   asp1 = L_asp_names[selector1]
@@ -120,11 +183,11 @@ def G(level):
   del L_asp_names[selector1]
   del L_asp[selector1]
   #randomly selects a new partner for the first aspect
-  selector2 = random.randint(0,2)
+  selector2 = random.randint(0,len(L_asp)-1)
   L_asp[selector2] = 2*level - selector1_level
 
   if L_asp[selector2] <= 0 or L_asp[selector2] > 5:
-      G(level)
+      G(level, pass_through, output_list)
 
   else:
 
@@ -134,29 +197,39 @@ def G(level):
       del L_asp_names[selector2]
       del L_asp[selector2]
 
-      #getting the first variable of the second pair
-      selector3 = random.randint(0,1)
-      selector3_level = random.randint(1,5)
+      if output_list[1] == 1:
+          #getting the first variable of the second pair
+          selector3 = random.randint(0,1)
+          selector3_level = random.randint(1,5)
 
-      asp3 = L_asp_names[selector3]
-      asp3_lvl = selector3_level
+          asp3 = L_asp_names[selector3]
+          asp3_lvl = selector3_level
 
-      del L_asp_names[selector3]
-      del L_asp[selector3]
+          del L_asp_names[selector3]
+          del L_asp[selector3]
 
-      #getting the last variable and the partner for the third aspect
+          #getting the last variable and the partner for the third aspect
 
-      selector4 = 0
-      L_asp[selector4] = 2*level - selector3_level
+          selector4 = 0
+          L_asp[selector4] = 2*level - selector3_level
 
-      if L_asp[selector4] <= 0  or L_asp[selector4] > 5:
-        G(level)
+          if L_asp[selector4] <= 0  or L_asp[selector4] > 5:
+            G(level, pass_through, output_list)
+          else:
+            asp4 = L_asp_names[selector4]
+            asp4_lvl = L_asp[selector4]
+
+            orderer(asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl, level)
+
       else:
-        asp4 = L_asp_names[selector4]
-        asp4_lvl = L_asp[selector4]
+            selector3 = 0
+            selector3_level = level
+            asp3 = L_asp_names[selector3]
+            asp3_lvl = selector3_level
+            orderer(asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, 0, 0, level)
 
-        orderer(asp1, asp1_lvl, asp2, asp2_lvl, asp3, asp3_lvl, asp4, asp4_lvl)
         #finder(asp1, asp1_lvl)
         #finder(asp2, asp2_lvl)
         #finder(asp3, asp3_lvl)
         #finder(asp4, asp4_lvl)
+
