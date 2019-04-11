@@ -1,0 +1,190 @@
+#BGG3
+#BGG3
+
+import random
+
+a=0
+b=0
+w=0
+s=0
+
+L_weapons_1 = ['dagger', 'slingshot', 'wooden shield', 'spear', 'small axe', 'club', 'dirk', 'whip', 'duel daggers']
+L_weapons_2 = ['small sword', 'metal shield', 'axe', 'hatchets', 'throwing stars', 'small hammer', 'metal spear', 'mace']
+L_weapons_3 = ['blaster pistol', 'halberd', 'DC-15', 'battle axe', 'broad sword']
+L_weapons_4 = ['scatter gun', 'long rifle', 'machine gun', 'grenade launcher', 'electro-sword']
+L_weapons_5 = ['missile launcher', 'sniper rifle', 'explosive hammer', 'laser-sword']
+
+L_b_1=['small poison spit','medium jumps','fast punches', 'agility']
+L_b_2=['fast running','hard to see','sonic scream', 'produces smoke']
+L_b_3=['high endurance','medium strength','laser eyes', 'scream blast', 'limited pain']
+L_b_4=['huge jumps','sonic blast','flight', 'moderated predictive abilities']
+L_b_5=['temporary mind control','metal bending','the force']
+
+L_s_1=['racoon','imp','spider','hobbit','small goblin', 'B1 Battle Droid']
+L_s_2=['orc','small human','large porcupine', 'water goblin', 'STOC Droid']
+L_s_3=['Bear','ogre','super battle droid', 'Boxer Droid']
+L_s_4=['feorrin','Platypus bear','mooselion','falleen', 'Clone Commando', 'rhino', 'assassin probe']
+L_s_5=['groot', "shia'du", "Changling (odo)", 'troll', 'demi-rancor', 'MDD']
+
+L_a_1 = ['vambraces','large wooden shield','chainmail cape']
+L_a_2 = ['full metal armor','medium steal shield','full studded leather armor', 'clone armor']
+L_a_3 = ['jetpack','high speed boots','magic thick skin', 'plastoid armor', 'red guard armor']
+L_a_4 = ['durasteel full body', 'rune armor', 'morph metal armor', 'spartan armor']
+L_a_5 = ['bohulrak armor', 'cortosis gauntlets', 'iron man suit', 'molding metal armor']
+
+a_lists=[L_a_1, L_a_2, L_a_3, L_a_4, L_a_5]
+b_lists = [L_b_1, L_b_2, L_b_3, L_b_4, L_b_5]
+s_lists = [L_s_1, L_s_2, L_s_3, L_s_4, L_s_5]
+w_lists = [L_weapons_1, L_weapons_2, L_weapons_3, L_weapons_4, L_weapons_5]
+
+
+suzereign = [a_lists, b_lists, s_lists, w_lists]
+
+
+class badguy:
+    def __init__(self):
+        self.species = ['species']
+        self.weapons = ['weapons']
+        self.abilities = ['bilities']
+        self.armor = ['armor']
+        self.aspects = [self.species, self.weapons, self.abilities, self.armor]
+        self.aspect_levels = []
+
+    def print_info(self):
+        print ("")
+
+		### Still need to make this agnostic!!!
+
+        for i in self.aspects:
+            print ("The Badguy's " + str(i[0])+" is " + str(i[1:]))
+        #print ("The Badguy's species is " + str(self.species))
+        #if len(self.weapons) == 2:
+        #    print ("The Badguy's weapon is " + str(self.weapons[1]))
+        #elif len(self.weapons) > 2:
+        #    print ("The Badguy's weapons are " + str(self.weapons[1:]))
+        #if len(self.abilities) == 2:
+        #    print ("The Badguy's ability is " + str(self.abilities[1]))
+        #elif len(self.abilities) > 2:
+        #    print ("The Badguy's abilities are " + str(self.abilities[1:]))
+        #if len(self.armor) == 2:
+        #    print ("The Badguy's armor is " + str(self.armor[1]))
+        #elif len(self.armor) > 2:
+        #    print ("The Badguy's armors are " + str(self.armor[1:]))
+
+def G(desired_level, desired_number = 1):
+    for i in range(desired_number):
+        print (i+1)
+        master(desired_level)
+
+def master(desired_level):
+    #makes an object
+    #determines which apsects are possessed
+    #determines the levels of each aspect
+    #determines the number of each apsects
+    #extracts actual items from the lists
+    bg = badguy()
+    bg.aspects = aspect_determiner(bg)
+    bg = level_determiner1(desired_level, bg)
+    for i in bg.aspects[1:]:
+        i = number_of_determiner(desired_level, i)
+    bg = big_picker_all_aspects(bg)
+    bg.print_info()
+
+def aspect_determiner(bg):
+    i = 1
+    while i < len (bg.aspects):
+        tf = random.randint(0,1)
+        if tf == 0:
+            del bg.aspects[i]
+        elif tf == 1:
+            i += 1
+    return bg.aspects
+
+def level_determiner1(desired_level, bg):
+    i = 0
+    temp_aspect_holder = []
+    while i < len(bg.aspects):
+        temp_aspect_holder.append(bg.aspects[i])
+        i += 1
+
+    if len(bg.aspects) != 1:
+
+### combine these two almost exactly the same pieces of code
+
+        if len(bg.aspects) % 2 == 0:
+            i = 0
+            while i < len(temp_aspect_holder):
+                first_level = random.randint(1, desired_level)
+                second_in_pair = (2*desired_level) - first_level
+                if second_in_pair > 5 or second_in_pair <= 0:
+                    continue
+                selector = random.randint(0, len(temp_aspect_holder) - 1)
+                temp_aspect_holder[selector].append(first_level)
+                temp_aspect_holder.remove(temp_aspect_holder[selector])
+                selector = random.randint(0, len(temp_aspect_holder) - 1)
+                temp_aspect_holder[selector].append(second_in_pair)
+                temp_aspect_holder.remove(temp_aspect_holder[selector])
+
+                i += 1
+
+        elif len(bg.aspects) % 2 == 1:
+            i=0
+            while i < len(temp_aspect_holder):
+                first_level = random.randint(1, desired_level)
+                second_in_pair = (2*desired_level) - first_level
+                if second_in_pair > 5 or second_in_pair <= 0:
+                    continue
+                selector = random.randint(0, len(temp_aspect_holder) - 1)
+                temp_aspect_holder[selector].append(first_level)
+                temp_aspect_holder.remove(temp_aspect_holder[selector])
+                selector = random.randint(0, len(temp_aspect_holder) - 1)
+                temp_aspect_holder[selector].append(second_in_pair)
+                temp_aspect_holder.remove(temp_aspect_holder[selector])
+
+                i += 1
+            temp_aspect_holder[0].append(desired_level)
+            temp_aspect_holder.remove(temp_aspect_holder[0])
+    else:
+        bg.aspects[0].append(desired_level)
+    return bg
+
+def number_of_determiner(desired_level, aspect):
+    #this boi takes the desired_level and outputs the number of that aspect they should have and their respective levels
+    level = aspect[1]
+    number = random.randint(1, level)
+    sum_all_levels = 0
+    temp_levels_list = []
+    while (sum_all_levels) != level:
+        sum_all_levels = 0
+        for i in range(number):
+            i = random.randint(1, level)
+            temp_levels_list.append(i)
+        for i in temp_levels_list:
+            sum_all_levels += i
+        if (sum_all_levels) == level:
+            del aspect[1]
+            for i in temp_levels_list:
+                aspect.append(i)
+        del temp_levels_list[:]
+
+    return aspect
+
+def big_picker_all_aspects(bg):
+    for count, value in enumerate(bg.aspects):
+        bg.aspects[count] = lil_finder_one_aspect_boi(value)
+    return bg
+
+def lil_finder_one_aspect_boi(aspect):
+    id = aspect[0]
+    print(aspect)
+    for count, value in enumerate(aspect[1:]):
+        aspect[count+1] = lilest_finder_one_item_boi(id, value)
+    return aspect
+
+def lilest_finder_one_item_boi(id, level):
+    #this is going to return an item
+    list_name = str(id[0]) + '_lists'
+    identity = eval(list_name)
+    leveled_list = identity[level-1]
+    selector = random.randint(0, len(leveled_list)-1)
+    return leveled_list[selector]
