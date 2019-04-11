@@ -176,7 +176,6 @@ def big_picker_all_aspects(bg):
 
 def lil_finder_one_aspect_boi(aspect):
     id = aspect[0]
-    print(aspect)
     for count, value in enumerate(aspect[1:]):
         aspect[count+1] = lilest_finder_one_item_boi(id, value)
     return aspect
